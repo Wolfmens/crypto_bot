@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-table-subscribers
+      author: Igor
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_subscribers
+                  name: id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bot_id
+                  remarks: ID подписанта в боте
+                  type: BIGINT
+              - column:
+                  name: price_subscription
+                  remarks: Цена на которую подписался пользователь
+                  type: BIGINT
+            tableName: subscribers
+

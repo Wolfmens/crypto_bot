@@ -1,5 +1,8 @@
 package com.skillbox.cryptobot.bot.command;
 
+import com.skillbox.cryptobot.dto.SubscriberDto;
+import com.skillbox.cryptobot.entity.Subscriber;
+import com.skillbox.cryptobot.service.SubscriberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,9 +17,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  * Обработка команды начала работы с ботом
  */
 @Service
-@AllArgsConstructor
 @Slf4j
-public class StartCommand implements IBotCommand {
+public class StartCommand extends CommandBotProcessing implements IBotCommand {
+
+    public StartCommand(SubscriberService subscriberService) {
+        super(subscriberService);
+    }
 
     @Override
     public String getCommandIdentifier() {
@@ -30,6 +36,16 @@ public class StartCommand implements IBotCommand {
 
     @Override
     public void processMessage(AbsSender absSender, Message message, String[] arguments) {
+        Long userIdInBot = message.getChatId();
+        if (!subscriberService.isSubscribeExist(userIdInBot)) {
+            Subscriber newSubscriber = subscriberService.create(SubscriberDto.builder()
+                    .botID(userIdInBot)
+                    .priceSubscription(null)
+                    .build());
+
+            log.info("Subscriber created {}", newSubscriber);
+        }
+
         SendMessage answer = new SendMessage();
         answer.setChatId(message.getChatId());
 

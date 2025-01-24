@@ -13,9 +13,30 @@ binance:
   api:
     getPrice: https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT
 
-db:
-  driver:
-    name: org.postgresql.Driver
-  url: jdbc:postgresql://localhost:5432/db
-  user: root
-  password: root
+logging:
+  level:
+    root: debug
+    org.liquibase: debug
+
+spring:
+  application:
+    name: cryptoBot
+  datasource:
+    url: jdbc:postgresql://localhost:5435/db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    generate-dll: true
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    database: postgresql
+    open-in-view: false
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
