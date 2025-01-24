@@ -22,6 +22,6 @@ databaseChangeLog:
               - column:
                   name: price_subscription
                   remarks: Цена на которую подписался пользователь
-                  type: BIGINT
+                  type: DOUBLE
             tableName: subscribers
 

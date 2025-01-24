@@ -36,6 +36,6 @@ public class Subscriber {
 
     @Column(name = "price_subscription")
     @Comment("Цена на которую подписался пользователь")
-    private Long priceSubscription;
+    private Double priceSubscription;
 
 }

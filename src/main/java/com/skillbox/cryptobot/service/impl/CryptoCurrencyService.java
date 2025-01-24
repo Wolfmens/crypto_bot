@@ -1,4 +1,4 @@
-package com.skillbox.cryptobot.service;
+package com.skillbox.cryptobot.service.impl;
 
 import com.skillbox.cryptobot.client.BinanceClient;
 import lombok.extern.slf4j.Slf4j;

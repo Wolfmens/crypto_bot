@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class CommandBotProcessing {
+public abstract class CommandBotProcessing {
 
     public final SubscriberService subscriberService;
 

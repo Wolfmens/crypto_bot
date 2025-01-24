@@ -15,6 +15,6 @@ public class SubscriberDto {
     @NotNull
     private Long botID;
 
-    private Long priceSubscription;
+    private Double priceSubscription;
 
 }

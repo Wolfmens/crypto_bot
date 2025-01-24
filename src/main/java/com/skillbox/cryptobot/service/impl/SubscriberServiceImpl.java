@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SubscriberServiceImpl implements SubscriberService {
@@ -31,7 +33,7 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     @Override
     @Transactional
-    public Subscriber updatePriceSubscription(Long subscriberBotd, Long newPriceSubscribe) {
+    public Subscriber updatePriceSubscription(Long subscriberBotd, Double newPriceSubscribe) {
         Subscriber subscriberByBotID = findByBotID(subscriberBotd);
         subscriberByBotID.setPriceSubscription(newPriceSubscribe);
 
@@ -42,5 +44,10 @@ public class SubscriberServiceImpl implements SubscriberService {
         return subscriberRepository.findByBotID(subscriberBotd).orElseThrow(
                 () -> new NotFoundException("Пользователь для подписки не найден")
         );
+    }
+
+    @Override
+    public List<Subscriber> findAllWhereCurrentPriceLessSubscription(Double currentPrice) {
+        return subscriberRepository.findAllWhereCurrentPriceLessSubscription(currentPrice);
     }
 }

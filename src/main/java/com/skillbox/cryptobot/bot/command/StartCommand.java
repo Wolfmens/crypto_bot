@@ -44,6 +44,8 @@ public class StartCommand extends CommandBotProcessing implements IBotCommand {
                     .build());
 
             log.info("Subscriber created {}", newSubscriber);
+        } else {
+            log.info("Subscriber already exists");
         }
 
         SendMessage answer = new SendMessage();

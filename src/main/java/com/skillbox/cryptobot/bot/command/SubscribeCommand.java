@@ -40,7 +40,7 @@ public class SubscribeCommand extends CommandBotProcessing implements IBotComman
     @Override
     public void processMessage(AbsSender absSender, Message message, String[] arguments) {
         Long userIdInBot = message.getChatId();
-        Long priceForSubcription = getPriceForSubcription(message);
+        Double priceForSubcription = getPriceForSubcription(message);
 
         SendMessage answer = new SendMessage();
         answer.setChatId(message.getChatId());
@@ -63,8 +63,12 @@ public class SubscribeCommand extends CommandBotProcessing implements IBotComman
         getPriceCommand.processMessage(absSender, message, arguments);
     }
 
-    private Long getPriceForSubcription(Message message) {
-        return Long.valueOf(message.getText().replaceAll("\\D", ""));
+    private Double getPriceForSubcription(Message message) {
+        return Double.valueOf(
+                message.getText()
+                        .replaceAll("\\D", "")
+                        .replaceAll("\\s", "")
+                        .trim());
     }
 
 }
