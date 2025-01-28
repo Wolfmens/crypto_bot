@@ -49,7 +49,7 @@ public class CryptoBot extends TelegramLongPollingCommandBot {
         log.info("Выбрана не существующая команда: {}", update.getMessage().getText());
     }
 
-    public void sendNoticeSubscriptionPriceUsers(String chatId, Double currentPrice) {
+    public void sendNoticeSubscriptionPriceUsers(String chatId, String currentPrice) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText("Пора покупать, стоимость биткоина: " + currentPrice);

@@ -41,7 +41,7 @@ public class GetSubscriptionCommand extends CommandBotProcessing implements IBot
                                 String textMessage = "Вы подписаны на стоимость биткоина " + price + " USD";
                                 sendMessage(absSender, userIdInBot, textMessage);
                             },
-                            () ->  {
+                            () -> {
                                 String textMessage = "Активные подписки отсутствуют";
                                 sendMessage(absSender, userIdInBot, textMessage);
                             });

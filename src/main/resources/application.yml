@@ -12,6 +12,9 @@ telegram:
 binance:
   api:
     getPrice: https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT
+  update-current-price:
+    value: 2
+    unit: MINUTES
 
 logging:
   level:
@@ -22,7 +25,7 @@ spring:
   application:
     name: cryptoBot
   datasource:
-    url: jdbc:postgresql://localhost:5435/db
+    url: jdbc:postgresql://localhost:5436/db
     username: root
     password: root
     driver-class-name: org.postgresql.Driver

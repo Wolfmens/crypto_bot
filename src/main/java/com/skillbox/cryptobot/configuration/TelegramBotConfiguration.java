@@ -5,6 +5,8 @@ import com.skillbox.cryptobot.bot.CryptoBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -12,6 +14,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Configuration
 @Slf4j
 public class TelegramBotConfiguration {
+
     @Bean
     TelegramBotsApi telegramBotsApi(CryptoBot cryptoBot) {
         TelegramBotsApi botsApi = null;
@@ -22,5 +25,14 @@ public class TelegramBotConfiguration {
             log.error("Error occurred while sending message to telegram!", e);
         }
         return botsApi;
+    }
+
+    @Bean
+    public TaskScheduler taskScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(5); // Укажите количество потоков
+        scheduler.setThreadNamePrefix("ScheduledTask-");
+        scheduler.initialize();
+        return scheduler;
     }
 }

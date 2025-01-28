@@ -26,6 +26,7 @@ public class BinanceClient {
                 .setSSLHostnameVerifier(new NoopHostnameVerifier())
                 .build();
     }
+
     public double getBitcoinPrice() throws IOException {
         log.info("Performing client call to binanceApi to get bitcoin price");
         try {
